@@ -489,3 +489,10 @@ input[type=radio].sheet-zero + span::before
 .sheet-attack {
   width: 15em;
 }
+
+.sheet-charm-desc {
+  display: none;
+}
+.sheet-charm:hover .sheet-charm-desc {
+  display: flex;
+}
