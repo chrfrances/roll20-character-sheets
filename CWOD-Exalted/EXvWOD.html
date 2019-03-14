@@ -246,8 +246,8 @@
 </script>
 
 <div class="sheet-flex-cols">
-<img  src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/CWOD-Exalted/Exalted-logo.jpg" alt='exalted logo' />
-<img  src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/CWOD-Exalted/WoD-logo.jpg" alt='wod logo' />
+<img  src="https://i.4pcdn.org/tg/1406745724598.png" alt='exalted logo' />
+<img  src="https://static.tvtropes.org/pmwiki/pub/images/wodlogo_348.jpg" alt='wod logo' />
 </div>
 
 <div class='sheet-body sheet-main-grid'>
@@ -833,7 +833,7 @@
       </fieldset>
       <h3 class='sheet-center'>Charms</h3>
       <fieldset class='repeating_charms'>
-        <div class='sheet-att'>
+        <div class='sheet-att sheet-charm'>
           <div class='sheet-dot-group'>
             <input type="radio" name="attr_charm" value="1" checked /> <span></span> 
             <input type="radio" name="attr_charm" value="2" /> <span></span> 
@@ -842,6 +842,10 @@
             <input type="radio" name="attr_charm" value="5" /> <span></span> 
           </div>
           <label><input type='text' name='attr_charmname' /></label>
+          <div class='sheet-charm-desc sheet-flex-cols'>
+            <textarea name='attr_charm_desc'></textarea>
+            <button type='roll' value="/ooc @{character_name} uses @{charmname}: @{charm_desc}"></button>
+          </div>
         </div>
       </fieldset>
     </div>
@@ -1090,12 +1094,12 @@
     <div class='sheet-cell-b4'>
       <h3 class='sheet-center'>Soak</h3>
       <input type="number" name="attr_soak_pool" />
-      <button type='roll' value='/roll (@{soak_pool}+?{Modifier|0})d10>?{Difficulty|6}f1sd' name='roll_soak'></button>
+      <button type='roll' value='/ooc @{character_name} soaks the damage: [[(@{soak_pool}+?{Modifier|0})d10>?{Difficulty|6}sd]]' name='roll_soak'></button>
     </div>
     <div class='sheet-cell-b5'>
       <h3 class='sheet-center'>Initiative</h3>
       <input type="number" name="attr_initiative_mod" />
-      <button type='roll' value='/roll 1d10 + @{initiative_mod} &{tracker}' name='roll_initiative'></button>
+      <button type='roll' value='/ooc @{character_name} is ready to rock! [[1d10 + @{initiative_mod} &{tracker}]]' name='roll_initiative'></button>
     </div>
     <div class='sheet-cell-b6'>
       <h3 class='sheet-center'>Essence Recovery</h3>
@@ -1109,9 +1113,9 @@
       <textarea class='sheet-ta sheet-short-height' name='attr_recovery' spellcheck="false" ></textarea>
     </div>
     <div class='sheet-cell-b7 sheet-flex-cols'>
-      <button type='roll' value='/roll (@{dexterity} + @{athletics} + ?{Modifier|0})d10>?{Difficulty|6}f1sd'>Dodge!</button>
-      <button type='roll' value='/roll (@{dexterity} + @{brawl} + ?{Modifier|0})d10>?{Difficulty|6}f1sd'>Block!</button>
-      <button type='roll' value='/roll (@{dexterity} + @{melee} + ?{Modifier|0})d10>?{Difficulty|6}f1sd'>Parry!</button>
+      <button type='roll' value='/ooc @{character_name} tries to get out of the way: [[(@{dexterity} + @{athletics} + ?{Modifier|0})d10>?{Difficulty|6}f[[1 - @{caste_athletics} - @{caste_dexterity}]]sd]]'>Dodge!</button>
+      <button type='roll' value='/ooc @{character_name} uses their body to deflect an attack: [[(@{dexterity} + @{brawl} + ?{Modifier|0})d10>?{Difficulty|6}f[[1 - @{caste_brawl} - @{caste_dexterity}]]sd]]'>Block!</button>
+      <button type='roll' value='/ooc @{character_name} uses their weapon to deflect an attack: [[(@{dexterity} + @{melee} + ?{Modifier|0})d10>?{Difficulty|6}f[[1 - @{caste_melee} - @{caste_dexterity}]]sd]]'>Parry!</button>
     </div>
   </div>
 
@@ -1531,22 +1535,26 @@
 </div>
 
 <div class='sheet-attacks'>
-  <h2 class='sheet-title'>Attacks</h2>
+  <h2 class='sheet-title'>Actions</h2>
   <div class='sheet-filler'>
     <fieldset class='repeating_attacks'>
       <div class='sheet-attack'>
         <div>
-          <input class='sheet-fullwidth' type='text' name='attr_attack' placeholder='Attack Name' />
+          <input class='sheet-fullwidth' type='text' name='attr_attack' placeholder='Action Name' />
+        </div>
+        <div>
+          <strong>Caste Ability/Attribute</strong>
+          <input class='sheet-favored' type='checkbox' name='attr_caste_roll' value='1'><span></span>
         </div>
         <div>
           <strong>Dicepool:</strong>
           <input type='number' name='attr_attack_dp' />
-          <button type='roll' value="/roll (@{attack_dp}+?{Modifier|0})d10>?{Difficulty|6}f1sd"></button>
+          <button type='roll' value="/ooc @{character_name} rolls to @{attack}: [[(@{attack_dp}+?{Modifier|0})d10>?{Difficulty|6}f[[1 - @{caste_roll}]]sd]]"></button>
         </div>
         <div>
           <strong>Damage:</strong>
           <input type='number' name='attr_attack_dmg' />
-          <button type='roll' value="/roll (@{attack_dmg}+?{Modifier|0})d10>?{Difficulty|6}f1sd"></button>
+          <button type='roll' value="/ooc @{character_name} rolls for damage: [[(@{attack_dmg}+?{Modifier|0})d10>?{Difficulty|6}sd]]"></button>
         </div>
         <div>
           <strong>Range:</strong>
